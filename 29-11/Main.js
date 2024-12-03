@@ -22,9 +22,19 @@ function cor(cor, string) {
 function selecionarPersonagem(numeroJogador) {
     console.clear();
     console.log(cor("azul", "Selecione o personagem do Jogador ".concat(numeroJogador, "\n\n[1] - Ryu       [5] - Honda\n[2] - Ken       [6] - Bison\n[3] - Blanka    [7] - Cammy\n[4] - Zangief   [8] - Dee Jay")));
-    var opcaoPersonagem = Number(ask.question(cor("ciano", "-<>===> ")));
+    var opcaoPersonagem = ask.question(cor("ciano", "-<>===> "));
+    if (opcaoPersonagem != "") {
+        opcaoPersonagem = Number(opcaoPersonagem);
+    }
     var arrayPersonagens = [Ryu_1.Ryu, Ken_1.Ken, Blanka_1.Blanka, Zangief_1.Zangief, Honda_1.Honda, Bison_1.Bison, Cammy_1.Cammy, DeeJay_1.DeeJay];
-    return new arrayPersonagens[opcaoPersonagem - 1];
+    if (typeof opcaoPersonagem == "number" && opcaoPersonagem > 0 && opcaoPersonagem < 9) {
+        return new arrayPersonagens[opcaoPersonagem - 1];
+    }
+    else {
+        console.log(cor("vermelho", "Opção não encontrada."));
+        ask.question(cor("amarelo", "Pressione ENTER para continuar..."));
+        return selecionarPersonagem(numeroJogador);
+    }
 }
 function mostrarHP() {
     console.clear();
@@ -35,7 +45,10 @@ function turno(jogador, inimigo, especial, num) {
     if (especial) {
         console.log(cor("amarelo", "[3] - Golpe especial"));
     }
-    var opcaoAtaque = Number(ask.question(cor("ciano", "-<>===> ")));
+    var opcaoAtaque = ask.question(cor("ciano", "-<>===> "));
+    if (opcaoAtaque != "") {
+        opcaoAtaque = Number(opcaoAtaque);
+    }
     switch (opcaoAtaque) {
         case 1:
             jogador.golpeLeve(inimigo);
@@ -67,7 +80,10 @@ function Main() {
     while (programaAtivo) {
         console.clear();
         console.log(cor("verde", "Sistema de simula\u00E7\u00E3o baseado em Street Fighter\nDigite o n\u00FAmero de uma op\u00E7\u00E3o:\n\n[1] - Novo jogo\n[0] - Sair"));
-        var opcaoMenu = Number(ask.question(cor("ciano", "-<>===> ")));
+        var opcaoMenu = ask.question(cor("ciano", "-<>===> "));
+        if (opcaoMenu != "") {
+            opcaoMenu = Number(opcaoMenu);
+        }
         switch (opcaoMenu) {
             case 1:
                 jogador1 = selecionarPersonagem(1);
@@ -93,6 +109,10 @@ function Main() {
             case 0:
                 programaAtivo = false;
                 console.log(cor("vermelho", "Encerrando..."));
+                break;
+            default:
+                console.log(cor("vermelho", "Opção não encontrada."));
+                break;
         }
         if (programaAtivo) {
             ask.question(cor("amarelo", "Pressione ENTER para continuar..."));

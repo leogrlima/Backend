@@ -22,7 +22,7 @@ function cor(cor: string, string: string): string {
     return `\x1b[${30 + cores.indexOf(cor.toLowerCase())}m${string}\x1b[0m`
 }
 
-function selecionarPersonagem(numeroJogador: number){
+function selecionarPersonagem(numeroJogador: number) {
     console.clear()
     console.log(cor("azul", 
 `Selecione o personagem do Jogador ${numeroJogador}
@@ -34,14 +34,20 @@ function selecionarPersonagem(numeroJogador: number){
 
     let opcaoPersonagem = ask.question(cor("ciano", "-<>===> "))
     if (opcaoPersonagem != ""){
-        Number(opcaoPersonagem)
+        opcaoPersonagem = Number(opcaoPersonagem)
     }
     let arrayPersonagens = [Ryu, Ken, Blanka, Zangief, Honda, Bison, Cammy, DeeJay]
-    return new arrayPersonagens[opcaoPersonagem - 1]
+    if (typeof opcaoPersonagem == "number" && opcaoPersonagem > 0 && opcaoPersonagem < 9) {
+        return new arrayPersonagens[opcaoPersonagem - 1]
+    } else {
+        console.log(cor("vermelho", "Opção não encontrada."))
+        ask.question(cor("amarelo", "Pressione ENTER para continuar..."))
+        return selecionarPersonagem(numeroJogador)
+    }
     
 }
 
-function mostrarHP(){
+function mostrarHP(): void {
     console.clear()
     console.log(cor("azul", 
 `Jogador 1 HP: ${jogador1.getVida()}
@@ -49,7 +55,7 @@ Jogador 2 HP: ${jogador2.getVida()}
 `))
 }
 
-function turno(jogador: Personagem, inimigo: Personagem, especial: boolean, num: number){
+function turno(jogador: Personagem, inimigo: Personagem, especial: boolean, num: number): void {
     console.log(cor("amarelo", 
 `Turno de Jogador ${num}:
 
@@ -59,7 +65,10 @@ function turno(jogador: Personagem, inimigo: Personagem, especial: boolean, num:
         console.log(cor("amarelo", "[3] - Golpe especial"))
     }
 
-    let opcaoAtaque = Number(ask.question(cor("ciano", "-<>===> ")))
+    let opcaoAtaque = ask.question(cor("ciano", "-<>===> "))
+    if (opcaoAtaque != ""){
+        opcaoAtaque = Number(opcaoAtaque)
+    }
 
     switch(opcaoAtaque){
         case 1:
@@ -100,7 +109,7 @@ Digite o número de uma opção:
 
         let opcaoMenu = ask.question(cor("ciano", "-<>===> "))
         if (opcaoMenu != ""){
-            Number(opcaoMenu)
+            opcaoMenu = Number(opcaoMenu)
         }
     
         switch(opcaoMenu){
