@@ -79,9 +79,10 @@ Digite a opcao desejada:`))
             }
 
             if (contatoLocalizado){
-                let nomeNovo = ask.question(cor("amarelo", "Digite o nome do contato: "))
-                let telefoneNovo = ask.question(cor("amarelo", "Digite o telefone do contato: "))
-                let emailNovo = ask.question(cor("amarelo", "Digite o email do contato: "))
+                agenda.buscarContato(nomeAntigo)
+                let nomeNovo = ask.question(cor("amarelo", "Digite o novo nome do contato: "))
+                let telefoneNovo = ask.question(cor("amarelo", "Digite o novo telefone do contato: "))
+                let emailNovo = ask.question(cor("amarelo", "Digite o novo email do contato: "))
 
                 agenda.editarContato(nomeAntigo, new Contato(nomeNovo, telefoneNovo, emailNovo))
 

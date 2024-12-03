@@ -63,9 +63,10 @@ function Main() {
                     }
                 }
                 if (contatoLocalizado) {
-                    var nomeNovo = ask.question(cor("amarelo", "Digite o nome do contato: "));
-                    var telefoneNovo = ask.question(cor("amarelo", "Digite o telefone do contato: "));
-                    var emailNovo = ask.question(cor("amarelo", "Digite o email do contato: "));
+                    agenda.buscarContato(nomeAntigo);
+                    var nomeNovo = ask.question(cor("amarelo", "Digite o novo nome do contato: "));
+                    var telefoneNovo = ask.question(cor("amarelo", "Digite o novo telefone do contato: "));
+                    var emailNovo = ask.question(cor("amarelo", "Digite o novo email do contato: "));
                     agenda.editarContato(nomeAntigo, new Contato_1.Contato(nomeNovo, telefoneNovo, emailNovo));
                     console.clear();
                     console.log(cor("verde", "Contato ".concat(nomeAntigo, " editado com sucesso!")));
