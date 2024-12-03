@@ -16,7 +16,30 @@ function cadastrarAluno(){
     let nomeAluno = ask.question(cor("amarelo", "Digite o nome do aluno: "))
     let idadeAluno = Number(ask.question(cor("amarelo", "Digite a idade do aluno: ")))
     let nacionalidadeAluno = ask.question(cor("amarelo", "Digite a nacionalidade do aluno: "))
-    let classeMagicaAluno = ask.question(cor("amarelo", "Digite a classe magica do aluno: "))
+    let classeMagicaAluno = ""
+    function classeMagica() {
+        console.log(cor("azul",
+`Digite o número da opção da classe mágica:
+
+[1] - Feitiçaria e Encantamentos        [7] - História da Magia
+[2] - Poções                            [8] - Cuidado de Criaturas Mágicas
+[3] - Transfiguração                    [9] - Voo
+[4] - Defesa Contra as Artes das Trevas [10] - Magia Experimental
+[5] - Herbologia                        [11] - Divinação
+[6] - Astronomia                        [12] - Runas Antigas.`))
+        let arrayClasseMagica = ["Feitiçaria e Encantamentos", "Poções", "Transfiguração", "Defesa Contra as Artes das Trevas", "Herbologia", "Astronomia", "História da Magia", "Cuidado de Criaturas Mágicas", "Voo", "Magia Experimental", "Divinação", "Runas Antigas"]
+        let opcaoClasseMagica = Number(ask.question(cor("ciano", "----> ")))
+        if (opcaoClasseMagica > 0 && opcaoClasseMagica < 13) {
+            classeMagicaAluno = arrayClasseMagica[opcaoClasseMagica - 1]
+        } else {
+            console.log(cor("vermelho", "Opção não encontrada."))
+            ask.question(cor("amarelo", "Pressione ENTER para continuar."))
+        }
+    }
+
+    while(classeMagicaAluno == ""){
+        classeMagica()
+    }
 
     console.clear()
 
@@ -60,6 +83,7 @@ function editarAluno(){
 Digite o número da opção:`))
 
             let opcao = Number(ask.question(cor("ciano", "----> ")))
+            let opcaoSelecionada = true
 
             switch(opcao){
                 case 1:
@@ -82,9 +106,17 @@ Digite o número da opção:`))
                     let novaClasseMagica = ask.question(cor("amarelo", "Insira a nova classe magica: "))
                     aluno.setClasseMagica(novaClasseMagica)
                     break
+                default:
+                    console.log(cor("vermelho", "Opção não encontrada."))
+                    opcaoSelecionada = false
+                    break
             }
-            console.clear()
-            console.log(cor("verde", `✏️ Aluno(a) ${aluno.getNome()} editado com sucesso!`))
+            if (opcaoSelecionada){
+                console.clear()
+                console.log(cor("verde", `✏️ Aluno(a) ${aluno.getNome()} editado com sucesso!`))
+            }
+        } else {
+            console.log(cor("vermelho", "Aluno não encontrado."))
         }
     }
 }

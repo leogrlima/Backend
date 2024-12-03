@@ -14,7 +14,22 @@ function cadastrarAluno() {
     var nomeAluno = ask.question(cor("amarelo", "Digite o nome do aluno: "));
     var idadeAluno = Number(ask.question(cor("amarelo", "Digite a idade do aluno: ")));
     var nacionalidadeAluno = ask.question(cor("amarelo", "Digite a nacionalidade do aluno: "));
-    var classeMagicaAluno = ask.question(cor("amarelo", "Digite a classe magica do aluno: "));
+    var classeMagicaAluno = "";
+    function classeMagica() {
+        console.log(cor("azul", "Digite o n\u00FAmero da op\u00E7\u00E3o da classe m\u00E1gica:\n\n[1] - Feiti\u00E7aria e Encantamentos        [7] - Hist\u00F3ria da Magia\n[2] - Po\u00E7\u00F5es                            [8] - Cuidado de Criaturas M\u00E1gicas\n[3] - Transfigura\u00E7\u00E3o                    [9] - Voo\n[4] - Defesa Contra as Artes das Trevas [10] - Magia Experimental\n[5] - Herbologia                        [11] - Divina\u00E7\u00E3o\n[6] - Astronomia                        [12] - Runas Antigas."));
+        var arrayClasseMagica = ["Feitiçaria e Encantamentos", "Poções", "Transfiguração", "Defesa Contra as Artes das Trevas", "Herbologia", "Astronomia", "História da Magia", "Cuidado de Criaturas Mágicas", "Voo", "Magia Experimental", "Divinação", "Runas Antigas"];
+        var opcaoClasseMagica = Number(ask.question(cor("ciano", "----> ")));
+        if (opcaoClasseMagica > 0 && opcaoClasseMagica < 13) {
+            classeMagicaAluno = arrayClasseMagica[opcaoClasseMagica - 1];
+        }
+        else {
+            console.log(cor("vermelho", "Opção não encontrada."));
+            ask.question(cor("amarelo", "Pressione ENTER para continuar."));
+        }
+    }
+    while (classeMagicaAluno == "") {
+        classeMagica();
+    }
     console.clear();
     if (typeof nomeAluno === "string" && typeof idadeAluno === "number" && typeof nacionalidadeAluno === "string" && typeof classeMagicaAluno === "string") {
         var alunoNovo = new Aluno_1.Aluno(nomeAluno, idadeAluno, nacionalidadeAluno, classeMagicaAluno);
@@ -47,6 +62,7 @@ function editarAluno() {
         if (aluno.getNome() == nomeAluno) {
             console.log(cor("azul", "Como deseja editar ".concat(aluno.getNome(), "?\n[1] - Alterar nome\n[2] - Alterar idade\n[3] - Alterar nacionalidade\n[4] - Alterar casa\n[5] - Alterar classe m\u00E1gica\n\nDigite o n\u00FAmero da op\u00E7\u00E3o:")));
             var opcao = Number(ask.question(cor("ciano", "----> ")));
+            var opcaoSelecionada = true;
             switch (opcao) {
                 case 1:
                     var novoNome = ask.question(cor("amarelo", "Insira o novo nome: "));
@@ -68,9 +84,18 @@ function editarAluno() {
                     var novaClasseMagica = ask.question(cor("amarelo", "Insira a nova classe magica: "));
                     aluno.setClasseMagica(novaClasseMagica);
                     break;
+                default:
+                    console.log(cor("vermelho", "Opção não encontrada."));
+                    opcaoSelecionada = false;
+                    break;
             }
-            console.clear();
-            console.log(cor("verde", "\u270F\uFE0F Aluno(a) ".concat(aluno.getNome(), " editado com sucesso!")));
+            if (opcaoSelecionada) {
+                console.clear();
+                console.log(cor("verde", "\u270F\uFE0F Aluno(a) ".concat(aluno.getNome(), " editado com sucesso!")));
+            }
+        }
+        else {
+            console.log(cor("vermelho", "Aluno não encontrado."));
         }
     }
 }

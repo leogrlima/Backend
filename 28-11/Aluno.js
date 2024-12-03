@@ -6,6 +6,7 @@ var Aluno = /** @class */ (function () {
         this.nome = nome;
         this.idade = idade;
         this.nacionalidade = nacionalidade;
+        var classesMagicas = ["Feitiçaria e Encantamentos", "Poções", "Transfiguração", "Defesa Contra as Artes das Trevas", "Herbologia", "Astronomia", "História da Magia", "Cuidado de Criaturas Mágicas", "Voo", "Magia Experimental", "Divinação", "Runas Antigas"];
         this.classeMagica = classeMagica;
     }
     Aluno.prototype.getNome = function () {
