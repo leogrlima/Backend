@@ -7,7 +7,6 @@ import { Honda } from "./Honda"
 import { Bison } from "./Bison"
 import { Cammy } from "./Cammy"
 import { DeeJay } from "./DeeJay"
-import { calcularDano } from "./calcularDano"
 
 const ask = require("readline-sync")
 let programaAtivo = true
@@ -65,10 +64,8 @@ function turno(jogador: Personagem, inimigo: Personagem, especial: boolean, num:
         console.log(cor("amarelo", "[3] - Golpe especial"))
     }
 
-    let opcaoAtaque = ask.question(cor("ciano", "-<>===> "))
-    if (opcaoAtaque != ""){
-        opcaoAtaque = Number(opcaoAtaque)
-    }
+    let repetir = false
+    let opcaoAtaque = Number(ask.question(cor("ciano", "-<>===> ")))
 
     switch(opcaoAtaque){
         case 1:
@@ -86,22 +83,28 @@ function turno(jogador: Personagem, inimigo: Personagem, especial: boolean, num:
                     especialJogador2 = false
                 }
             } else {
+                repetir = true
                 console.log(cor("vermelho", "Golpe não encontrado."))
             }
             break
         default:
+            repetir = true
             console.log(cor("vermelho", "Golpe não encontrado."))
             break
     }
 
     ask.question(cor("amarelo", "Pressione ENTER para continuar..."))
+    if (repetir){
+        mostrarHP()
+        turno(jogador, inimigo, especial, num)
+    }
 }
 
 function Main(){
     while(programaAtivo){
         console.clear()
         console.log(cor("verde", 
-`Sistema de simulação baseado em Street Fighter
+`-- Sistema de simulação baseado em Street Fighter --
 Digite o número de uma opção:
 
 [1] - Novo jogo

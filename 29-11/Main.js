@@ -45,10 +45,8 @@ function turno(jogador, inimigo, especial, num) {
     if (especial) {
         console.log(cor("amarelo", "[3] - Golpe especial"));
     }
-    var opcaoAtaque = ask.question(cor("ciano", "-<>===> "));
-    if (opcaoAtaque != "") {
-        opcaoAtaque = Number(opcaoAtaque);
-    }
+    var repetir = false;
+    var opcaoAtaque = Number(ask.question(cor("ciano", "-<>===> ")));
     switch (opcaoAtaque) {
         case 1:
             jogador.golpeLeve(inimigo);
@@ -67,19 +65,25 @@ function turno(jogador, inimigo, especial, num) {
                 }
             }
             else {
+                repetir = true;
                 console.log(cor("vermelho", "Golpe não encontrado."));
             }
             break;
         default:
+            repetir = true;
             console.log(cor("vermelho", "Golpe não encontrado."));
             break;
     }
     ask.question(cor("amarelo", "Pressione ENTER para continuar..."));
+    if (repetir) {
+        mostrarHP();
+        turno(jogador, inimigo, especial, num);
+    }
 }
 function Main() {
     while (programaAtivo) {
         console.clear();
-        console.log(cor("verde", "Sistema de simula\u00E7\u00E3o baseado em Street Fighter\nDigite o n\u00FAmero de uma op\u00E7\u00E3o:\n\n[1] - Novo jogo\n[0] - Sair"));
+        console.log(cor("verde", "-- Sistema de simula\u00E7\u00E3o baseado em Street Fighter --\nDigite o n\u00FAmero de uma op\u00E7\u00E3o:\n\n[1] - Novo jogo\n[0] - Sair"));
         var opcaoMenu = ask.question(cor("ciano", "-<>===> "));
         if (opcaoMenu != "") {
             opcaoMenu = Number(opcaoMenu);

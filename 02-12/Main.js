@@ -13,7 +13,7 @@ function cor(cor, string) {
 function Main() {
     while (sustentaMenu) {
         console.clear();
-        console.log(cor("azul", "Escolha uma op\u00E7\u00E3o:\n 1 - Adicionar contato\n 2 - Remover contato\n 3 - Listar todos os contatos\n 4 - Buscar contato\n 5 - Editar contato\n 6 - Sair\n\nDigite a opcao desejada:"));
+        console.log(cor("azul", "-- Sistema de agenda --\n 1 - Adicionar contato\n 2 - Remover contato\n 3 - Listar todos os contatos\n 4 - Buscar contato\n 5 - Editar contato\n 6 - Sair\nDigite a op\u00E7\u00E3o desejada:"));
         var opcao = ask.question(cor("azul", ">>> "));
         switch (opcao) {
             case "1":

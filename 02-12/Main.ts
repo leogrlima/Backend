@@ -14,15 +14,14 @@ function cor(cor: string, string: string): string {
 function Main() {
     while (sustentaMenu) {
         console.clear()
-        console.log(cor("azul", `Escolha uma opção:
+        console.log(cor("azul", `-- Sistema de agenda --
  1 - Adicionar contato
  2 - Remover contato
  3 - Listar todos os contatos
  4 - Buscar contato
  5 - Editar contato
  6 - Sair
-
-Digite a opcao desejada:`))
+Digite a opção desejada:`))
       
     const opcao = ask.question(cor("azul", ">>> "))
       
